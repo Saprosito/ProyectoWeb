@@ -43,17 +43,17 @@ class ProductoController extends Controller
             'nombre' => 'required', 'descripcion' => 'required', 'imagen' => 'required|image|mimes:jpeg,png,svg|max:1024'
         ]);
 
-         $producto = $request->all();
+        $producto = $request->all();
 
-         if($imagen = $request->file('imagen')) {
-             $rutaGuardarImg = 'imagen/';
-             $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
-             $imagen->move($rutaGuardarImg, $imagenProducto);
-             $producto['imagen'] = "$imagenProducto";             
-         }
-         
-         Producto::create($producto);
-         return redirect()->route('productos.index');
+        if($imagen = $request->file('imagen')) {
+            $rutaGuardarImg = 'imagen/';
+            $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $imagenProducto);
+            $producto['imagen'] = "$imagenProducto";             
+        }
+        
+        Producto::create($producto);
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -90,17 +90,17 @@ class ProductoController extends Controller
         $request->validate([
             'nombre' => 'required', 'descripcion' => 'required'
         ]);
-         $prod = $request->all();
-         if($imagen = $request->file('imagen')){
+        $prod = $request->all();
+        if($imagen = $request->file('imagen')){
             $rutaGuardarImg = 'imagen/';
             $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension(); 
             $imagen->move($rutaGuardarImg, $imagenProducto);
             $prod['imagen'] = "$imagenProducto";
-         }else{
+        }else{
             unset($prod['imagen']);
-         }
-         $producto->update($prod);
-         return redirect()->route('productos.index');
+        }
+        $producto->update($prod);
+        return redirect()->route('productos.index');
     }
 
     /**
@@ -113,5 +113,9 @@ class ProductoController extends Controller
     {
         $producto->delete();
         return redirect()->route('productos.index');
+    }
+
+    public function mostrar (Producto $producto){
+            return view('productos.foro', compact('productos'));
     }
 }

@@ -8,8 +8,6 @@
 
 @section('content')
 <x-app-layout>
-
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class=" overflow-hidden shadow-xl sm:rounded-lg">
@@ -29,7 +27,7 @@
                     @foreach ($productos as $producto)
                     <tr>
                         <td style="display: none;">{{$producto->id}}</td>
-                        <td>{{$producto->nombre}}</td>
+                        <td><a href=""><b>{{$producto->nombre}}</b></a></td>
                         <td>{{$producto->descripcion}}</td>
                         <td  class="border px-14 py-1">
                             <img src="/imagen/{{$producto->imagen}}" width="60%">
@@ -50,7 +48,7 @@
                     </tr>
                     @endforeach   
                 </tbody>  
-                     
+                
             </table>   
                 <div>
                     {!! $productos->links() !!}
@@ -69,16 +67,16 @@
 @section('js')
 <script>
     (function () {
-  'use strict'
+    'use strict'
   //debemos crear la clase formEliminar dentro del form del boton borrar
   //recordar que cada registro a eliminar esta contenido en un form  
-  var forms = document.querySelectorAll('.formEliminar')
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {        
-          event.preventDefault()
-          event.stopPropagation()        
-          Swal.fire({
+    var forms = document.querySelectorAll('.formEliminar')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {        
+            event.preventDefault()
+            event.stopPropagation()        
+            Swal.fire({
                 title: '¿Eliminará este manga/manhwa/manhua permanentemente?',        
                 icon: 'info',
                 showCancelButton: true,
@@ -91,7 +89,7 @@
                     Swal.fire('¡Eliminado!', 'El manga/manhwa/manhua se ha eliminado exitosamente.','success');
                 }
             })                      
-      }, false)
+        }, false)
     })
 })()
 </script>
